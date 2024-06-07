@@ -7,16 +7,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hospital.POJO.Cita;
 import com.hospital.constents.HospitalConstant;
-import com.hospital.dao.CitasDao;
 import com.hospital.rest.CitaRest;
 import com.hospital.service.CitaService;
-import com.hospital.service.EspecialidadService;
-import com.hospital.service.MedicoService;
 import com.hospital.utils.HospitalUtils;
 
 @RestController

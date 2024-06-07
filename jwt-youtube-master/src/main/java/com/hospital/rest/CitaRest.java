@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hospital.POJO.Cita;
-import com.hospital.POJO.Especialidad;
-import com.hospital.wrapper.MedicoWrapper;
 
 @RequestMapping(path = "/cita")
 public interface CitaRest {

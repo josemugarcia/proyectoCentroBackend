@@ -1,7 +1,6 @@
 package com.hospital.POJO;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,8 +16,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

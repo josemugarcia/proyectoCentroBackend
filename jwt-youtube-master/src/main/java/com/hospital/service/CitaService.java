@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.http.ResponseEntity;
 
 import com.hospital.POJO.Cita;
-import com.hospital.wrapper.MedicoWrapper;
 
 public interface CitaService {
 

@@ -8,24 +8,18 @@ import java.util.Optional;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.google.common.base.Strings;
 import com.hospital.JWT.CustomerUserDetailsService;
 import com.hospital.JWT.JwtFilter;
 import com.hospital.JWT.JwtUtil;
-import com.hospital.POJO.Especialidad;
-import com.hospital.POJO.Medico;
 import com.hospital.POJO.User;
 import com.hospital.constents.HospitalConstant;
 import com.hospital.service.UserService;
-import com.hospital.utils.EmailUtils;
 import com.hospital.utils.HospitalUtils;
 import com.hospital.wrapper.UserWrapper;
 import com.hospital.dao.UserDao;
