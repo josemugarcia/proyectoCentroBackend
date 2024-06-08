@@ -209,25 +209,25 @@ public ResponseEntity<String> deleteCita(Integer idCita) {
 
             // Obtener información del usuario asociado a la cita
             Optional<User> optionalUser = userDao.findById(cita.getUsuario().getId());
-             if (optionalUser.isPresent()) {
-                 User usuario = optionalUser.get();
+            if (optionalUser.isPresent()) {
+                User usuario = optionalUser.get();
 
-                 // Formatear la fecha de la cita
-                 Date fechaCita = cita.getFecha();
-                 Instant instant = fechaCita.toInstant();
-                 LocalDateTime fechaHoraCita = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM 'a las' HH:mm");
-                 String fechaHoraFormateada = fechaHoraCita.format(formatter);
+                // Formatear la fecha de la cita
+                Date fechaCita = cita.getFecha();
+                Instant instant = fechaCita.toInstant();
+                LocalDateTime fechaHoraCita = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM 'a las' HH:mm", new Locale("es", "ES"));
+                String fechaHoraFormateada = fechaHoraCita.format(formatter);
 
-                 // Construir el cuerpo del correo electrónico
-                 String asunto = "Cancelación de Cita";
-                 String cuerpo = "Estimado " + usuario.getNombre() + ",\n\n" +
-                         "Su cita programada para el " + fechaHoraFormateada + " ha sido cancelada.\n\n" +
-                         "Gracias por confiar en nosotros.";
+                // Construir el cuerpo del correo electrónico
+                String asunto = "Cancelación de Cita";
+                String cuerpo = "Estimado " + usuario.getNombre() + ",\n\n" +
+                        "Su cita programada para el " + fechaHoraFormateada + " ha sido cancelada.\n\n" +
+                        "Gracias por confiar en nosotros.";
 
-                 // Enviar el correo electrónico
-                 emailService.sendEmail(usuario.getEmail(), cuerpo, asunto);
-             }
+                // Enviar el correo electrónico
+                emailService.sendEmail(usuario.getEmail(), cuerpo, asunto);
+            }
 
             return HospitalUtils.getResponseEntity("Cita eliminada correctamente", HttpStatus.OK);
         } else {
@@ -238,6 +238,7 @@ public ResponseEntity<String> deleteCita(Integer idCita) {
         return HospitalUtils.getResponseEntity(HospitalConstant.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
+
 
 
     @Override
