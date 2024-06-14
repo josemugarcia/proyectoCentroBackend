@@ -41,15 +41,15 @@ public class CitaRestImpl implements CitaRest {
         return HospitalUtils.getResponseEntity(HospitalConstant.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
    }
 
-   @Override
-   public ResponseEntity<String> updateCita(Map<String, String> requestMap) {
-      try {
-         return citaService.updateCita(requestMap);
-    } catch (Exception ex) {
-     ex.printStackTrace();
-    }
-    return HospitalUtils.getResponseEntity(HospitalConstant.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
-   }
+   // @Override
+   // public ResponseEntity<String> updateCita(Map<String, String> requestMap) {
+   //    try {
+   //       return citaService.updateCita(requestMap);
+   //  } catch (Exception ex) {
+   //   ex.printStackTrace();
+   //  }
+   //  return HospitalUtils.getResponseEntity(HospitalConstant.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+   // }
 
    @Override
     public ResponseEntity<String> deleteCita(Integer idCita) {

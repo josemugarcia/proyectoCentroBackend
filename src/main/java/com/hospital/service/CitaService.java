@@ -13,7 +13,7 @@ public interface CitaService {
 
     ResponseEntity<String> addNewCita(Map<String, String> requestMap);
 
-    ResponseEntity<String> updateCita(Map<String, String> requesMap);
+    // ResponseEntity<String> updateCita(Map<String, String> requesMap);
 
     ResponseEntity<String> deleteCita(Integer idCita);
 

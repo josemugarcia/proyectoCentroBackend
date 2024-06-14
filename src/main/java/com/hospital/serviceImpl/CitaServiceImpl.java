@@ -113,7 +113,7 @@ public ResponseEntity<String> addNewCita(Map<String, String> requestMap) {
                 User usuario = optionalUser.get();
                 String emailEnvio = usuario.getEmail();
                 String asunto = "Confirmación de Cita";
-                String cuerpo = "Estimado/da " + usuario.getNombre() + ",\n\n" +
+                String cuerpo = "Estimado/a " + usuario.getNombre() + ",\n\n" +
                         "Su cita ha sido programada para el " + fechaFormateada + " a las " + cita.getHora() + "\n\nGracias por confiar en nosotros";
 
                 emailService.sendEmail(emailEnvio, cuerpo, asunto);
@@ -193,11 +193,11 @@ public ResponseEntity<String> addNewCita(Map<String, String> requestMap) {
         }
     }
 
-    @Override
-    public ResponseEntity<String> updateCita(Map<String, String> requesMap) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCita'");
-    }
+    // @Override
+    // public ResponseEntity<String> updateCita(Map<String, String> requesMap) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'updateCita'");
+    // }
 
     @Override
 public ResponseEntity<String> deleteCita(Integer idCita) {

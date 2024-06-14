@@ -25,9 +25,9 @@ public interface CitaRest {
 
     ResponseEntity<String> addNewCita(@RequestBody Map<String, String> requestMap);
 
-    @PostMapping(path = "/update")
+    // @PostMapping(path = "/update")
 
-    ResponseEntity<String> updateCita(@RequestBody Map<String, String> requestMap);
+    // ResponseEntity<String> updateCita(@RequestBody Map<String, String> requestMap);
 
     @DeleteMapping(path = "/delete/{idCita}")
     ResponseEntity<String> deleteCita(@PathVariable Integer idCita);
