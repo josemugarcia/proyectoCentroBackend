@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -98,33 +99,32 @@ public ResponseEntity<String> addNewCita(Map<String, String> requestMap) {
             citasDao.save(cita);
 
             Optional<User> optionalUser = userDao.findById(cita.getUsuario().getId());
-             if (optionalUser.isPresent()) {
-                 // Convertir la fecha de Date a LocalDate
-               Date fechaDate = cita.getFecha();
+            if (optionalUser.isPresent()) {
+                // Convertir la fecha de Date a LocalDate
+                Date fechaDate = cita.getFecha();
                 Instant instant = fechaDate.toInstant();
                 LocalDate fecha = instant.atZone(ZoneId.systemDefault()).toLocalDate();
 
-                 // Formatear la fecha
-                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM");
+                // Formatear la fecha con Locale español
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM", new Locale("es", "ES"));
                 String fechaFormateada = fecha.format(formatter);
 
                 // Resto del código sin cambios
                 User usuario = optionalUser.get();
                 String emailEnvio = usuario.getEmail();
                 String asunto = "Confirmación de Cita";
-                String cuerpo = "Estimado " + usuario.getNombre() + ",\n\n" +
+                String cuerpo = "Estimado/da " + usuario.getNombre() + ",\n\n" +
                         "Su cita ha sido programada para el " + fechaFormateada + " a las " + cita.getHora() + "\n\nGracias por confiar en nosotros";
 
                 emailService.sendEmail(emailEnvio, cuerpo, asunto);
-         }
+            }
 
             return HospitalUtils.getResponseEntity("Cita agregada correctamente", HttpStatus.OK);
         }
         return HospitalUtils.getResponseEntity(HospitalConstant.INVALID_DATA, HttpStatus.BAD_REQUEST);
     } catch (Exception ex) {
         log.error("Error al agregar nueva cita: {}", ex.getMessage(), ex);
-        return HospitalUtils.getResponseEntity(HospitalConstant.SOMETHING_WENT_WRONG,
-                HttpStatus.INTERNAL_SERVER_ERROR);
+        return HospitalUtils.getResponseEntity(HospitalConstant.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -209,25 +209,25 @@ public ResponseEntity<String> deleteCita(Integer idCita) {
 
             // Obtener información del usuario asociado a la cita
             Optional<User> optionalUser = userDao.findById(cita.getUsuario().getId());
-             if (optionalUser.isPresent()) {
-                 User usuario = optionalUser.get();
+            if (optionalUser.isPresent()) {
+                User usuario = optionalUser.get();
 
-                 // Formatear la fecha de la cita
-                 Date fechaCita = cita.getFecha();
-                 Instant instant = fechaCita.toInstant();
-                 LocalDateTime fechaHoraCita = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM 'a las' HH:mm");
-                 String fechaHoraFormateada = fechaHoraCita.format(formatter);
+                // Formatear la fecha de la cita
+                Date fechaCita = cita.getFecha();
+                Instant instant = fechaCita.toInstant();
+                LocalDateTime fechaHoraCita = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM 'a las' HH:mm", new Locale("es", "ES"));
+                String fechaHoraFormateada = fechaHoraCita.format(formatter);
 
-                 // Construir el cuerpo del correo electrónico
-                 String asunto = "Cancelación de Cita";
-                 String cuerpo = "Estimado " + usuario.getNombre() + ",\n\n" +
-                         "Su cita programada para el " + fechaHoraFormateada + " ha sido cancelada.\n\n" +
-                         "Gracias por confiar en nosotros.";
+                // Construir el cuerpo del correo electrónico
+                String asunto = "Cancelación de Cita";
+                String cuerpo = "Estimado/a " + usuario.getNombre() + ",\n\n" +
+                        "Su cita programada para el " + fechaHoraFormateada + " ha sido cancelada.\n\n" +
+                        "Gracias por confiar en nosotros.";
 
-                 // Enviar el correo electrónico
-                 emailService.sendEmail(usuario.getEmail(), cuerpo, asunto);
-             }
+                // Enviar el correo electrónico
+                emailService.sendEmail(usuario.getEmail(), cuerpo, asunto);
+            }
 
             return HospitalUtils.getResponseEntity("Cita eliminada correctamente", HttpStatus.OK);
         } else {
@@ -238,6 +238,7 @@ public ResponseEntity<String> deleteCita(Integer idCita) {
         return HospitalUtils.getResponseEntity(HospitalConstant.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
+
 
 
     @Override
